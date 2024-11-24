@@ -1,0 +1,264 @@
+/* Reset and general styles for body */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Montserrat;
+}
+
+/* Navigation bar container */
+.navigation-bar {
+    background-color: transparent;  /* Transparent background */
+    width: 100%; /* Full width of the viewport */
+    position: fixed;  /* Fixed position at the top */
+    top: 0;
+    display: flex;  /* Enable Flexbox */
+    justify-content: space-between; /* Logo on left, menu on right */
+    align-items: center; /* Vertically center the content */
+    height: 70px; /* Set a fixed height for the navigation bar */
+    padding: 0 10px;  /* Add padding on the sides */
+    z-index: 10; /* Ensures the navbar stays above other content */
+}
+
+/* Logo image styles */
+.navigation-bar img {
+    width: auto;
+    height: 50px;
+}
+
+/* Styling the navigation list */
+#navigation-container {
+    display: flex; /* Use Flexbox for navigation container */
+    width: 100%; /* Full width of the parent */
+    justify-content: space-between; /* Spread the logo and menu items apart */
+    align-items: center; /* Vertically center items */
+}
+
+/* Styling the navigation list */
+.navigation-bar ul {
+    display: flex; /* Display list items horizontally */
+    padding: 0;
+    margin: 0;
+    list-style-type: none; /* Remove default list styling */
+}
+
+/* List item styles */
+.navigation-bar li {
+    margin: 0 15px; /* Add horizontal spacing between menu items */
+}
+
+.navigation-bar li a {
+    color: white;
+    font-size: 16px;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-decoration: none; /* Remove underline from links */
+    line-height: 70px; /* Vertically center text inside the link */
+    padding: 5px 15px; /* Padding for spacing inside links */
+    opacity: 0.7; /* Slightly transparent links */
+}
+
+.navigation-bar li a:hover {
+    opacity: 1; /* Full opacity on hover */
+}
+.navigation-bar img{
+    height: 72px;
+    width: 72px;
+}
+
+
+
+/* Carousel Styling */
+.carousel-image {
+    position: relative;  /* Allows absolute positioning of images inside it */
+    width: 100%;         /* Full width of the container */
+    height: 100vh;       /* Full height of the viewport */
+    overflow: hidden;    /* Hide images that are not in view */
+    z-index: 1;          /* Ensure carousel is behind the navbar */
+    opacity: 0.9;
+}
+
+/* Initially hide all images */
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure images cover the container without distortion */
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+/* Show active image */
+.carousel-slide.active {
+    opacity: 1;
+}
+
+/* Hero text styling */
+.hero-text {
+    position: absolute; /* Positioning text on top of the carousel images */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Fine-tune centering */
+    color: white;
+    text-align: center;
+    z-index: 2; /* Ensure text is above the carousel images */
+}
+
+.hero-text h1 {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 3rem;
+    
+}
+
+/*About section basic styling*/
+.about_section{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.about-title{
+    font-size: 2.5rem;
+}
+.about-text{
+    font-size: 1.25rem;
+}
+
+
+
+/* MV Section Styling */
+.MV_section {
+    position: relative;
+    width: 100%; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    /* background-image: url('images/MV.jpg'); Hero image */
+    background-size: cover; /* Make sure the image covers the entire section */
+    background-position: center; /* Center the image */
+    color: white;
+    display: flex; /* Enable Flexbox */
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+}
+
+/* Container to hold the mission and vision cards */
+.MV_container {
+    display: flex; /* Align cards horizontally */
+    justify-content: space-between; /* Space cards apart */
+    width: 80%; /* Adjust the container width */
+    max-width: 1200px; /* Optional: Set a max width for the container */
+}
+
+/* Card styling for both mission and vision */
+.card {
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly dark background for readability */
+    padding: 30px;
+    border-radius: 10px;
+    width: 45%; /* Cards will take 45% of the container width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    margin: 0 20px; /* Add horizontal margin to space out the cards */
+
+}
+
+/* Styling for the Mission title */
+.M_title, .V_title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Styling for the Mission and Vision paragraphs */
+.card p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+}
+
+/* Styling for the MV Section hero image */
+.mv_hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fills the area without distortion */
+    z-index: -1; /* Ensure the image is in the background */
+}
+
+
+
+.services_section{
+    padding: 50px 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+.services-title{
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+.services_container{
+    display: flex; /* Align cards horizontally */
+    justify-content: space-around; /* Space cards evenly */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    max-width: 1200px;
+    margin: 0 auto; /* Center the container */
+}
+.services_card{
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 10px;
+    width: 30%; /* Cards will take 30% of the container width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    margin: 20px 0; /* Add vertical margin to space out the cards */
+}
+.service-title{
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+.service-description{
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+
+.offi_section{
+    padding: 50px 0;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+.offi-header{
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+.offi_container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.offi_card{
+    padding: 20px;
+    border-radius: 10px;
+    width: 18%;
+    margin: 20px 0;
+    text-align: center;
+}
+.offi_image{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+.offi-title{
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.offi-description{
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+
