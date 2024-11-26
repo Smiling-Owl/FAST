@@ -3,7 +3,7 @@ body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #FFF5E3;
+    background-color: #895129;
 }
 
 /* Navigation bar container */
@@ -23,7 +23,7 @@ body {
 /* Logo image styles */
 .navigation-bar img {
     width: auto;
-    height: 50px;
+    height: 90px;
 }
 
 /* Styling the navigation list */
@@ -48,21 +48,21 @@ body {
 }
 
 .navigation-bar li a {
-    color: #F4F4F4;
+    color: #f4f4f4;
     font-size: 16px;
     font-family: "PT Sans", Arial, Helvetica, sans-serif;
     text-decoration: none; /* Remove underline from links */
     line-height: 70px; /* Vertically center text inside the link */
     padding: 5px 15px; /* Padding for spacing inside links */
-    opacity: 0.7; /* Slightly transparent links */
+    opacity: 1; /* Slightly transparent links */
 }
 
 .navigation-bar li a:hover {
     opacity: 1; /* Full opacity on hover */
 }
 .navigation-bar img{
-    height: 72px;
-    width: 72px;
+    height: 80px;
+    width: 80px;
 }
 
 
@@ -128,7 +128,9 @@ body {
 /*About section basic styling*/
 .about_section{
     text-align: center;
-    margin-top: 30px;
+    margin-top: px;
+    background-color: #895129;
+    color: #F4F4F4;
 }
 
 .about-title{
@@ -168,7 +170,7 @@ body {
 
 /* Card styling for both mission and vision */
 .card {
-    background-color: rgba(0, 0, 0, 0.6); /* Slightly dark background for readability */
+    background-color: rgba(158, 100, 52, 0.8); /* Slightly dark background for readability */
     padding: 30px;
     border-radius: 10px;
     width: 45%; /* Cards will take 45% of the container width */
@@ -207,8 +209,9 @@ body {
 
 .services_section{
     padding: 50px 0;
-    background-color: #FFF5E3;
+    background-color: #895129;
     text-align: center;
+    color: #F4F4F4;
 }
 .services-header{
     font-size: 2.5rem;
@@ -223,7 +226,7 @@ body {
     margin: 0 auto; /* Center the container */
 }
 .services_card{
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(118, 93, 76, 0.8);
     padding: 30px;
     border-radius: 10px;
     width: 30%; /* Cards will take 30% of the container width */
@@ -244,8 +247,9 @@ body {
 
 .offi_section{
     padding: 50px 0;
-    background-color: #FFF5E3;
+    background-color: #5E503F;
     text-align: center;
+    color: #F4F4F4;
 }
 .offi-header{
     font-size: 2.5rem;
@@ -286,7 +290,7 @@ body {
 
 .footer_section {
     height: auto; /* Allow footer to adjust height based on content */
-    background-color: black;
+    background-color: 34, 31, 23;
     color: #f4f4f4;
     text-align: center;
     padding: 2rem 0; /* Add padding for spacing */
