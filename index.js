@@ -1,3 +1,23 @@
+// Hide the nav bar when scrolling (source: Dcode)
+{
+    const nav = document.querySelector(".navigation-bar");
+    let lastScrollY = window.scrollY;
+
+    window.addEventListener("scroll", () => {
+        if (lastScrollY < window.scrollY){
+            console.log("we are going down");
+            nav.classList.add("nav--hidden");
+        }
+        else {
+            console.log("we are going up");
+            nav.classList.remove("nav--hidden");
+
+        }
+
+        lastScrollY = window.scrollY;
+    });
+}
+
 // JavaScript to make the carousel work
 const images = document.querySelectorAll('.carousel-slide');  // Get all images in the carousel
 let currentIndex = 0; // Index of the current active image
