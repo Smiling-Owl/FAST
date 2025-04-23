@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Registration</title>
+    <link rel="icon" type="image/x-icon" href="../../../Main-images/FAST logo white trans.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Student-application.css">
+</head>
+<body>
+
+    <div class="Coloryey"></div>
+
+    <div class="carousel-image">
+        <img src="Main-Images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+        <img src="Main-Images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="Main-Images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+    </div>
+
+    <div class="Form_Contents">
+        <h2>Student Registration</h2>
+        <form action="../../register.php" method="post">
+            <input type="hidden" name="user_type" value="student">
+
+            <div class="Form_Info">
+                <label>Username (e.g., Student ID):</label>
+                <input type="text" name="username" required>
+            </div>
+
+            <div class="Form_Info">
+                <label>Password:</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="Form_Info">
+                <label>Confirm Password:</label>
+                <input type="password" name="confirm_password" required>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+        <div class="links">
+            <a href="../Main-Student-LogIn/StudentLogIn.html">Already have an account? Log In</a>
+        </div>
+    </div>
+
+    <script src="Student-application.js"></script>
+</body>
+</html>
