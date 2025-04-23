@@ -1,14 +1,24 @@
 <?php
 session_start();
 
-// Check if the user is logged in and is a student
-if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
-    // User is not logged in or is not a student, redirect to the student login page
-    header("Location: ../index.php");
-    exit();
-}
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    // User is logged in
+    $user_type = $_SESSION['user_type'];
 
-// If the user is logged in and is a student, continue displaying the dashboard content
+    // Redirect to the appropriate dashboard
+    if ($user_type === 'student') {
+        header("Location: Student/student_dashboard.php");
+        exit();
+    } elseif ($user_type === 'tutor') {
+        header("Location: Tutors/tutor_dashboard.php");
+        exit();
+    } else {
+        // Invalid user type (shouldn't happen, but handle it anyway)
+        echo "Invalid user type.";
+        exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,9 +26,9 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Dashboard</title>
+    <title>Foundation of Ateneo Student Tutors</title>
     <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -37,7 +47,8 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
     <link
         href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="../Design_request.css">
+
+    <!-- Font Awesome CSS -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -48,25 +59,29 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../Main-images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="Main-images/FAST Logo Trans.png" alt="FAST Logo">
                 <ul>
                     <li><a href="#about" aria-label="About FAST">ABOUT</a></li>
-                    <li><a href="Request/Request.html" aria-label="Request Tutoring">REQUEST</a></li>
+                    <li><a href="https://drive.google.com/file/d/1nHvpnqNicJBeiuxhJk2B0ViLr556tSRM/view"
+                            target="_blank" aria-label="Developers (opens in a new tab)">DEVELOPERS</a></li>
+
 
                     <li>
+                        <!-- Conditionally Displays LOG IN Button (No Logout on Landing Page) -->
+                        <?php if (!isset($_SESSION['user_id'])): ?>
                         <div class="dropdown">
-                            <button class="DropApplication"><a>APPLY NOW!</a>
+                            <button class="DropApplication"><a>LOG IN NOW!</a>
                                 <i class="down"></i>
                             </button>
                             <div class="Dropdown_Application">
-                                <a href="Application-Students/Student.php" target="_blank"
-                                    aria-label="Student Application (opens in a new tab)">STUDENT</a>
-                                <a href="../Tutors/Application-Tutors/Tutor.php" target="_blank"
-                                    aria-label="Tutor Application (opens in a new tab)">TUTORS</a>
+                                <a href="Student/Main-Student-LogIn/StudentLogIn.html" target="_blank"
+                                    aria-label="Student Login (opens in a new tab)">STUDENT</a>
+                                <a href="Tutors/Main-Tutor-Login/TutorLogIn.html" target="_blank"
+                                    aria-label="Tutor Login (opens in a new tab)">TUTORS</a>
                             </div>
                         </div>
+                        <?php endif; ?>
                     </li>
-                    <li><a href="../logout.php">LOG OUT</a></li>
                 </ul>
             </div>
         </div>
@@ -88,17 +103,17 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
             </div>
 
             <div class="carousel-image">
-                <img src="../Main-Images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
-                <img src="../Main-Images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
-                <img src="../Main-Images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
-                <img src="../Main-Images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+                <img src="Main-Images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+                <img src="Main-Images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+                <img src="Main-Images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+                <img src="Main-Images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
             </div>
         </div>
     </section>
 
     <section class="about_section" id="about">
         <h1 class="about-title"> ABOUT US </h1>
-        <img class="about-us" src="../Main-images/about-us-images2.jpeg" alt="About Us">
+        <img class="about-us" src="Main-images/about-us-images2.jpeg" alt="About Us">
         <p class="about-text">
             The Foundation of Ateneo Student Tutors is an organization that specializes in the hosting and
             providing of tutoring services from Ateneo students for Ateneo students. FAST upholds the priority
@@ -110,7 +125,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
     </section>
 
     <section class="MV_section">
-        <img class="mv_hero-image" src="../Main-images/MV.jpg" alt="Mission Vision Hero">
+        <img class="mv_hero-image" src="Main-images/MV.jpg" alt="Mission Vision Hero">
         <div class="MV_container">
             <div class="mission__section card">
                 <h1 class="M_title">MISSION</h1>
@@ -162,49 +177,49 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
         <h1 class="offi-header">FAST Officiating Members</h1>
         <div class="offi_container">
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Clyde Xander I. Cielo</h2>
                 <p class="offi-description">FAST President</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Whaine Krysthian C. Perocho</h2>
                 <p class="offi-description">FAST Vice-President</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Shaima K. Marah</h2>
                 <p class="offi-description">FAST Secretary</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Dee Marie Melangell J. Majorenos</h2>
                 <p class="offi-description">FAST Treasurer</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Nahla A. Awang</h2>
                 <p class="offi-description">FAST Auditor</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Remalyn P. Muyot</h2>
                 <p class="offi-description">FAST Public Relations Officer</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Denzl John P. Ramos</h2>
                 <p class="offi-description">FAST Logistics Head</p>
             </div>
 
             <div class="offi_card">
-                <img src="../Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
+                <img src="Main-images/offi_temp6.jpg" alt="Officer 1" class="offi_image">
                 <h2 class="offi-title">Axl Sayaddi</h2>
                 <p class="offi-description">FAST Board Member</p>
             </div>
@@ -229,7 +244,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
     </footer>
 
 
-    <script src="../index.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
