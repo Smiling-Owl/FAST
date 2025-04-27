@@ -1,14 +1,3 @@
-<?php
-session_start();
-
-// Check if the user is logged in and is a student
-if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'student') {
-    // User is not logged in or is not a student, redirect to the student login page
-    header("Location: ../index.php");
-    exit();
-}
-
-// If the user is logged in and is a student, continue displaying the dashboard content
 ?>
 <!DOCTYPE html>
 <html lang="en">

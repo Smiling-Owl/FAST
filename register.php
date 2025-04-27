@@ -1,25 +1,23 @@
 <?php
 session_start();
 
-// Database connection details
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "user";
 
-$conn = null; // Initialize connection outside the try block
-$stmt = null; // Initialize statement outside the try block
+$conn = null;
+$stmt = null; 
 
 try {
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Get user input
+
     $username = $_POST['username'];
     $password = $_POST['password'];
     $user_type = $_POST['user_type'];
@@ -37,7 +35,6 @@ try {
         exit();
     }
 
-    // SQL query to check username
     $sql = "SELECT id, password FROM $table_name WHERE username = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);

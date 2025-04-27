@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-// Check if the user is logged in
+
 if (isset($_SESSION['user_id'])) {
-    // User is logged in
+    
     $user_type = $_SESSION['user_type'];
 
-    // Redirect to the appropriate dashboard
+
     if ($user_type === 'student') {
         header("Location: Student/student_dashboard.php");
         exit();
@@ -14,7 +14,6 @@ if (isset($_SESSION['user_id'])) {
         header("Location: Tutors/tutor_dashboard.php");
         exit();
     } else {
-        // Invalid user type (shouldn't happen, but handle it anyway)
         echo "Invalid user type.";
         exit();
     }

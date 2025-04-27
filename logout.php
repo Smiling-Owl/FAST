@@ -1,6 +1,6 @@
 <?php
-session_start(); // Start the session
-session_destroy(); // Destroy all session data
-header("Location: index.php"); // Redirect to the landing page
-exit(); // Terminate script execution
+session_start(); 
+session_destroy(); 
+header("Location: index.php"); 
+exit();
 ?>
