@@ -124,6 +124,8 @@ $result_tutors = $conn->query($sql_tutors);
       <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
     </div>
   </footer>
+
+  <script src="../admin/JS_admin.js"></script>
 </body>
 </html>
 
