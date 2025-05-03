@@ -31,7 +31,7 @@ $result_tutors = $conn->query($sql_tutors);
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Add New Class - FAST Admin</title>
   <link rel="icon" type="image/x-icon" href="../Main-images/FAST logo white trans.png" />
-  <link rel="stylesheet" href="add_class_style.css">
+  <link rel="stylesheet" href="../admin/Admin_Styles/add_class_style.css">
 </head>
 <body>
   <header>
