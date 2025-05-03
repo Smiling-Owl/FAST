@@ -14,23 +14,26 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all classes with tutor information (joining tutors and tutor_application tables)
-$sql_classes = "SELECT
-                    c.class_id,
-                    c.class_name,
-                    c.description,
-                    c.room,
-                    c.timeslot_day,
-                    c.timeslot_time,
-                    ta.fullname AS tutor_name,
-                    c.is_open
-                FROM classes c
-                LEFT JOIN tutors t ON c.tutor_id = t.user_id  -- Corrected JOIN condition
-                LEFT JOIN tutor_application ta ON t.user_id = ta.user_id";
-$result_classes = $conn->query($sql_classes);
+// Fetch pending student applications with student username
+$sql_applications = "SELECT sa.id AS application_id,
+                             sa.fullname,
+                             sa.student_id,
+                             sa.email,
+                             sa.application_date,
+                             sa.status,
+                             u.username AS student_username
+                     FROM student_application sa
+                     INNER JOIN users u ON sa.user_id = u.id
+                     WHERE sa.status = 'pending'";
+$result_applications = $conn->query($sql_applications);
+
+if ($result_applications === false) {
+    echo "Error executing query: " . $conn->error;
+    die();
+}
+
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,85 +41,28 @@ $result_classes = $conn->query($sql_classes);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Classes - FAST Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="stylesheet" href="admin_dashboard_style.css">
-    <style>
-        .class-list {
-            margin-top: 20px;
-        }
-
-        .class-item {
-            background-color: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .class-item > div {
-            margin-right: 15px;
-        }
-
-        .class-item > div:last-child {
-            margin-right: 0;
-        }
-
-        .action-buttons button {
-            padding: 8px 15px;
-            margin-left: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .edit-button {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .delete-button {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .add-new-class {
-            margin-top: 20px;
-        }
-
-        .add-new-class a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .action-buttons button, .action-buttons a { /* Added 'a' to the selector */
-        padding: 8px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-decoration: none;
-        color: white;
-    }
-
-    .edit-button {
-        background-color: #007bff;
-    }
-
-    .delete-button {
-        background-color: #dc3545;
-    }
-
-    </style>
+    <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="manage_classes.css">
 </head>
 <body>
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="../Main-images/FAST logo white trans.png" alt="FAST Logo">
                 <ul>
                     <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
                     <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
@@ -164,13 +110,19 @@ $result_classes = $conn->query($sql_classes);
             ?>
         </div>
     </div>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
-        </div>
-    </footer>
-
+    <div class="carousel-image">
+            <img src="../Main-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+            <img src="../Main-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+            <img src="../Main-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+            <img src="../Main-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+          </div>
+          <div class="carousel-overlay"></div>
+        <footer>
+            <div class="footer-content">
+                <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
+            </div>
+        </footer>
+        <script src="JS_admin.js"></script>
 </body>
 </html>
 
