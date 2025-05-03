@@ -58,7 +58,7 @@ if (isset($_SESSION['user_id'])) {
     <header>
         <div class="navigation-bar">
             <div id="navigation-container">
-                <img src="Main-images/FAST Logo Trans.png" alt="FAST Logo">
+                <img src="Main-images/FAST logo white trans.png" alt="FAST Logo">
                 <ul>
                     <li><a href="#about" aria-label="About FAST">ABOUT</a></li>
                     <li><a href="https://drive.google.com/file/d/1nHvpnqNicJBeiuxhJk2B0ViLr556tSRM/view"
