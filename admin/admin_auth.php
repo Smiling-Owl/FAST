@@ -1,6 +1,31 @@
 <?php
 session_start();
 
+function showError($message) {
+    echo <<<HTML
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login Error</title>
+        <link rel="stylesheet" href="Admin_Styles/process_styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <div class="message error">
+                $message
+            </div>
+            <div class="back-link">
+                <a href="admin_login.php">Back to Login</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    HTML;
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = $_POST["password"];
@@ -8,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = new mysqli("localhost", "root", "", "fastdb");
 
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        showError("Connection failed: " . $conn->connect_error);
     }
 
     $stmt = $conn->prepare("SELECT id, username, password FROM users WHERE username = ?");
@@ -37,24 +62,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: admin_dashboard.php");
                 exit();
             } else {
-                $role_stmt->close();
-                $stmt->close();
-                $conn->close();
-                header("Location: admin_login.php?error=You do not have administrator privileges.");
-                exit();
+                showError("You do not have administrator privileges.");
             }
         } else {
-            $stmt->close();
-            $conn->close();
-            header("Location: admin_login.php?error=Invalid username or password.");
-            exit();
+            showError("Invalid username or password.");
         }
     } else {
-        $stmt->close();
-        $conn->close();
-        header("Location: admin_login.php?error=Invalid username or password.");
-        exit();
+        showError("Invalid username or password.");
     }
+
+    $stmt->close();
+    $conn->close();
 } else {
     header("Location: admin_login.php");
     exit();
