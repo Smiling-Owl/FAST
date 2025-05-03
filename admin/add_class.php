@@ -27,213 +27,103 @@ $result_tutors = $conn->query($sql_tutors);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Class - FAST Admin</title>
-    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="stylesheet" href="admin_dashboard_style.css">
-    <style>
-        /* ... (Your existing admin styles) ... */
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .form-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="time"],
-        .form-group select,
-        .form-group textarea,
-        .form-group input[type="number"]{
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            height: 100px;
-        }
-
-        .form-group input[type="checkbox"] {
-            margin-top: 10px;
-        }
-
-        .form-group button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
-
-        .success-message {
-            color: green;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        .error-message {
-            color: red;
-            text-align: center;
-            margin-top: 10px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add New Class - FAST Admin</title>
+  <link rel="icon" type="image/x-icon" href="../Main-images/FAST logo white trans.png" />
+  <link rel="stylesheet" href="add_class_style.css">
 </head>
 <body>
-    <header>
-        <div class="navigation-bar">
-            <div id="navigation-container">
-                <img src="../images/FAST Logo Trans.png" alt="FAST Logo">
-                <ul>
-                    <li><a href="admin_dashboard.php" aria-label="Admin Dashboard">ADMIN DASHBOARD</a></li>
-                    <li><a href="popular_requests.php" aria-label="Popular Requests">POPULAR REQUESTS</a></li>
-                    <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
-                    <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
-                    <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
-                    <li><a href="logout.php">LOG OUT</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-    <div class="container">
-        <h1>Add New Class</h1>
-
-        <div class="form-container">
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $class_name = $_POST['class_name'];
-                $description = $_POST['description'];
-                $room = $_POST['room'];
-                $timeslot_day = $_POST['timeslot_day'];
-                $timeslot_time = $_POST['timeslot_time'];
-                $tutor_id = $_POST['tutor_id'];
-                $capacity = $_POST['capacity'];
-                $is_open = isset($_POST['is_open']) ? 1 : 0;
-
-                $stmt = $conn->prepare("INSERT INTO classes (class_name, description, room, timeslot_day, timeslot_time, tutor_id, capacity, is_open) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-
-                if ($stmt === false) {
-                    echo "Error preparing SQL: " . $conn->error;
-                    $conn->close();
-                    exit();
-                }
-
-                $stmt->bind_param("sssssiii", $class_name, $description, $room, $timeslot_day, $timeslot_time, $tutor_id, $capacity, $is_open);
-
-                if ($stmt->execute()) {
-                    echo '<p class="success-message">Class added successfully!</p>';
-                } else {
-                    echo '<p class="error-message">Error adding class: ' . $stmt->error . '</p>';
-                }
-
-                $stmt->close();
-            }
-            ?>
-            <form method="POST" action="">
-                <h2>Add New Class</h2>
-                <div class="form-group">
-                    <label for="class_name">Class Name:</label>
-                    <input type="text" id="class_name" name="class_name" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="room">Room:</label>
-                    <input type="text" id="room" name="room">
-                </div>
-                <div class="form-group">
-                    <label for="timeslot_day">Day:</label>
-                    <select id="timeslot_day" name="timeslot_day">
-                        <option value="Monday">Monday</option>
-                        <option value="Tuesday">Tuesday</option>
-                        <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday">Thursday</option>
-                        <option value="Friday">Friday</option>
-                        <option value="Saturday">Saturday</option>
-                        <option value="Sunday">Sunday</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="timeslot_time">Time:</label>
-                    <input type="time" id="timeslot_time" name="timeslot_time">
-                </div>
-                <div class="form-group">
-                    <label for="tutor_id">Tutor:</label>
-                    <select id="tutor_id" name="tutor_id" required>
-                        <option value="">-- Select a Tutor --</option>
-                        <?php
-                        if ($result_tutors && $result_tutors->num_rows > 0) {
-                            while ($row_tutor = $result_tutors->fetch_assoc()) {
-                                echo '<option value="' . htmlspecialchars($row_tutor['tutor_id']) . '">' . htmlspecialchars($row_tutor['tutor_fullname']) . '</option>';
-                            }
-                        } else {
-                            echo '<option value="">No approved tutors yet.</option>';
-                        }
-                        ?>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="capacity">Class Capacity:</label>
-                    <input type="number" id="capacity" name="capacity" min="1" value="10" required>
-                </div>
-                <div class="form-group">
-                    <label for="is_open">Open for Enrollment:</label>
-                    <input type="checkbox" id="is_open" name="is_open" value="1" checked>
-                </div>
-                <div class="form-group">
-                    <button type="submit">Add Class</button>
-                </div>
-            </form>
-        </div>
+  <header>
+    <div class="navigation-bar">
+      <div class="logo-container">
+        <img src="../Main-images/FAST logo white trans.png" alt="FAST Logo">
+      </div>
+      <ul>
+        <li><a href="admin_dashboard.php">ADMIN DASHBOARD</a></li>
+        <li><a href="popular_requests.php">POPULAR REQUESTS</a></li>
+        <li><a href="manage_applications.php">MANAGE APPLICATIONS</a></li>
+        <li><a href="manage_tutor_applications.php">MANAGE TUTOR APPLICATIONS</a></li>
+        <li><a href="manage_classes.php">MANAGE CLASSES</a></li>
+        <li><a href="logout.php">LOG OUT</a></li>
+      </ul>
     </div>
+  </header>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
+  <div class="carousel-image">
+    <img src="Admin-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
+    <img src="Admin-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+    <img src="Admin-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+    <img src="Admin-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+  </div>
+
+  <div class="container">
+    <h1>ADD NEW CLASS</h1>
+    <div class="form-container">
+      <form method="POST" action="">
+        <div class="form-group">
+          <label for="class_name">Class Name:</label>
+          <input type="text" id="class_name" name="class_name" required>
         </div>
-    </footer>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="room">Room:</label>
+          <input type="text" id="room" name="room">
+        </div>
+        <div class="form-group">
+          <label for="timeslot_day">Day:</label>
+          <select id="timeslot_day" name="timeslot_day">
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="timeslot_time">Time:</label>
+          <input type="time" id="timeslot_time" name="timeslot_time">
+        </div>
+        <div class="form-group">
+          <label for="tutor_id">Tutor:</label>
+          <select id="tutor_id" name="tutor_id" required>
+            <option value="">-- Select a Tutor --</option>
+            <?php
+              if ($result_tutors && $result_tutors->num_rows > 0) {
+                while ($row_tutor = $result_tutors->fetch_assoc()) {
+                  echo '<option value="' . htmlspecialchars($row_tutor['tutor_id']) . '">' . htmlspecialchars($row_tutor['tutor_fullname']) . '</option>';
+                }
+              } else {
+                echo '<option value="">No approved tutors yet.</option>';
+              }
+            ?>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="capacity">Class Capacity:</label>
+          <input type="number" id="capacity" name="capacity" min="1" value="10" required>
+        </div>
+        <div class="form-group">
+          <label for="is_open">Open for Enrollment:</label>
+          <input type="checkbox" id="is_open" name="is_open" value="1" checked>
+        </div>
+        <div class="form-group">
+          <button type="submit">Add Class</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
+  <footer>
+    <div class="footer-content">
+      <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
+    </div>
+  </footer>
 </body>
 </html>
 
