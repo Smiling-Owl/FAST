@@ -58,7 +58,7 @@ body {
 .navigation-bar li a {
     transition: transform 0.5s;
     color: #F4F4F4;
-    font-size: 12px;
+    font-size: 14px;
     font-family: 'Oswald', sans-serif;
     text-decoration: none;
     line-height: 70px;
