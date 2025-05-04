@@ -52,18 +52,25 @@ if ($result_users === false) {
 }
 $total_users = $result_users->fetch_assoc()['total_users'] ?? 0;
 
+// Fetch submitted reports
+$sql_reports = "SELECT username, subject, message, date_submitted FROM reports ORDER BY date_submitted DESC";
+$result_reports = $conn->query($sql_reports);
+if ($result_reports === false) {
+    echo "Error executing query (reports): " . $conn->error;
+    die();
+}
+
 $conn->close();
 ?>
 
-
-0<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FAST Admin Dashboard</title>
     <link rel="icon" type="image/x-icon" href="../admin/Admin-images/FAST logo white trans.png">
-    <link rel="stylesheet" href="../admin/Admin_Styles/admin_dashboard_style.css">
+    <link rel="stylesheet" href="admin_dashboard_style.css">
 </head>
 
 <body>
@@ -85,10 +92,10 @@ $conn->close();
     </header>
     
   <div class="carousel-image">
-    <img src="Admin-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
-    <img src="Admin-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
-    <img src="Admin-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
-    <img src="Admin-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+    <img src="../images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide active">
+    <img src="../images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+    <img src="../images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+    <img src="../images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
   </div>
 
     <div class="container">
@@ -114,13 +121,46 @@ $conn->close();
         </div>
     </div>
 
+    <div class="reports-section">
+    <h2 id="reports_header">Submitted Reports</h2>
+    <?php if ($result_reports->num_rows > 0): ?>
+        <div class="reports-table-container">
+            <table class="reports-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Date Submitted</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result_reports->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td><?php echo htmlspecialchars($row['subject']); ?></td>
+                            <td><?php echo nl2br(htmlspecialchars($row['message'])); ?></td>
+                            <td><?php echo htmlspecialchars($row['date_submitted']); ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php else: ?>
+        <p>No reports have been submitted.</p>
+    <?php endif; ?>
+</div>
+
+
+
     <footer>
         <div class="footer-content">
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
 
-    <script src="../admin/JS_admin.js"></script>
+    <script src="../index.js"></script>
 
 </body>
 </html>
+
