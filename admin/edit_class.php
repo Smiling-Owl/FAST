@@ -44,72 +44,23 @@ if (isset($_GET['class_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Class - FAST Admin</title>
     <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
-    <link rel="stylesheet" href="admin_dashboard_style.css">
-    <style>
-        .form-container {
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-
-        .form-container h2 {
-            margin-top: 0;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="time"],
-        .form-group input[type="number"],
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        .form-group input[type="checkbox"] {
-            margin-left: 10px;
-        }
-
-        .form-group button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        .form-group button:hover {
-            background-color: #0056b3;
-        }
-
-        .error-message {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .success-message {
-            color: green;
-            margin-top: 10px;
-        }
-    </style>
+    <link rel="icon" type="image/x-icon" href="../images/FAST logo white trans.png">
+    <link rel="icon" type="image/x-icon" href="/Main-images/FAST logo white trans.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Admin_Styles/edit_class.css">
+</head>
 </head>
 <body>
     <header>
@@ -122,7 +73,7 @@ if (isset($_GET['class_id'])) {
                     <li><a href="manage_applications.php" aria-label="Manage Applications">MANAGE APPLICATIONS</a></li>
                     <li><a href="manage_tutor_applications.php" aria-label="Manage Tutor Applications">MANAGE TUTOR APPLICATIONS</a></li>
                     <li><a href="manage_classes.php" aria-label="Manage Classes">MANAGE CLASSES</a></li>
-                    <li><a href="logout.php">LOG OUT</a></li> // Adjust if you don't have this file ?>
+                    <li><a href="logout.php">LOG OUT</a></li> <!--// Adjust if you don't have this file ?-->
                 </ul>
             </div>
         </div>
@@ -197,13 +148,19 @@ if (isset($_GET['class_id'])) {
             </form>
         </div>
     </div>
-
+    <div class="carousel-image">
+        <img src="../Main-images/carousel_1.jpg" alt="Hero Image 1" class="carousel-slide">
+        <img src="../Main-images/carousel_2.jpg" alt="Hero Image 2" class="carousel-slide">
+        <img src="../Main-images/carousel_3.jpg" alt="Hero Image 3" class="carousel-slide">
+        <img src="../Main-images/carousel_4.jpg" alt="Hero Image 4" class="carousel-slide">
+      </div>
+      <div class="carousel-overlay"></div>
     <footer>
         <div class="footer-content">
             <p>&copy; <?php echo date("Y"); ?> Foundation of Ateneo Student Tutors - Admin Area</p>
         </div>
     </footer>
-
+    <script src="JS_admin.js"></script>
 </body>
 </html>
 
